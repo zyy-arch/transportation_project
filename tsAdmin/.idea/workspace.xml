@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="066d3cf7-cdde-40c5-aafe-3790d27cc615" name="更改" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="3338Af6c4VgarWhhwEgDPVUnFLn" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.jfinal_demo_for_maven [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.jfinal_demo_for_maven [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.jfinal_demo_for_maven [install].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zhouman/Downloads/tsAdmin/启动说明&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDK&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.updates&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;,
+    &quot;应用程序.DemoConfig.executor&quot;: &quot;Debug&quot;,
+    &quot;数据库脚本.blog.sql.executor&quot;: &quot;Run&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ],
+    &quot;RunConfigurationTargetLRU&quot;: [
+      &quot;2550ee0c-e0d3-4040-ab4e-a53731a2ad48&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zhouman\Downloads\tsAdmin\启动说明" />
+    </key>
+  </component>
+  <component name="RunManager" selected="应用程序.DemoConfig">
+    <configuration name="DemoConfig" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tsAdmin.common.DemoConfig" />
+      <module name="jfinal_demo_for_maven" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tsAdmin.common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="blog.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/启动说明/blog.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="2550ee0c-e0d3-4040-ab4e-a53731a2ad48" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.DemoConfig" />
+        <item itemvalue="数据库脚本.blog.sql" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="066d3cf7-cdde-40c5-aafe-3790d27cc615" name="更改" comment="" />
+      <created>1758534252698</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758534252698</updated>
+      <workItem from="1758534253928" duration="410000" />
+      <workItem from="1758591049600" duration="867000" />
+      <workItem from="1758591928677" duration="2322000" />
+      <workItem from="1758605339060" duration="1161000" />
+      <workItem from="1758616322516" duration="3818000" />
+      <workItem from="1758632691357" duration="1364000" />
+      <workItem from="1758778050642" duration="3427000" />
+      <workItem from="1758792626874" duration="469000" />
+      <workItem from="1758793290366" duration="3258000" />
+      <workItem from="1758798484234" duration="1479000" />
+      <workItem from="1758799989495" duration="1088000" />
+      <workItem from="1758801102213" duration="1334000" />
+      <workItem from="1759020074695" duration="2710000" />
+      <workItem from="1759022809199" duration="1314000" />
+      <workItem from="1759137584852" duration="31000" />
+      <workItem from="1759137824439" duration="15000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

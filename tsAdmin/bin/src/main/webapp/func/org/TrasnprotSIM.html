@@ -1,0 +1,45 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/fa.png">
+<title>管理</title>
+<!-- Bootstrap Core CSS -->
+<link href="../ui/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- animation CSS -->
+<link href="../ui/css/animate.css" rel="stylesheet">
+<!-- Custom CSS -->
+<link href="../ui/css/style.css" rel="stylesheet">
+<!-- color CSS -->
+<link href="../ui/css/colors/blue.css" id="theme"  rel="stylesheet">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<style type="text/css">
+
+.login-register-back {
+    background: url(../plugins/images/timg${imgUrlNum!}.jpg) center center/cover no-repeat!important;
+    height: 100%;
+    position: fixed;
+}
+</style>
+
+</head>
+<body>
+ this is a new page.and i=${i!},j=${j!}
+ </br>
+ <#list resList2 as r>
+	POI_name is:${r.poi_name!}|${r.poi_name_lat!}|${r.poi_name_lon!}</br>
+ </#list>
+ </br>
+ at is:${actionType!}
+ 
+</body>
+</html>
