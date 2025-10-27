@@ -63,7 +63,7 @@ public class OrgController extends Controller {
 		String para1=getPara("loginName");
 		String para2=getPara("pass");
 		System.out.println(para1+"\\"+para2);
-		String mykeyString="af8d7eef6373429b855d68efaf3ed6af";
+		String mykeyString="680174f12400afe6abc38c1c20d3cca1";
 		int para3 = 5;
 		
 		//转换为URL编码用于传递中文
