@@ -204,17 +204,21 @@
     	console.log('按钮交互测试成功');
     	$.ajax({
             url: '../org/getPolyline', // 后端API地址
-            type: 'GET', // 请求方式
+            type: 'POST', // 请求方式
             data: {
                 origin: origin,
                 destination: destination
             },
+            timeout:30000,
             dataType: 'json', // 预期返回的数据类型
             success: function(response) {
                 // 请求成功处理
                 if (response.code == 1) {
                     // 成功获取数据，在地图上添加标记
-                    console.log('获取数据成功')
+                	console.log('获取数据成功');
+                    addRouteAndAnimation(response.polylines);
+                    alert('获取数据成功！坐标点数量: ' + response.polylines.length);
+                    
                 } else {
                     alert('获取数据失败：' + response.message);
                 }
@@ -226,6 +230,64 @@
         });
     }
 
+    var polyline = null;
+    var passedPolyline = null;
+    var currentLineArr = [];
+    
+    function addRouteAndAnimation (coordinates) {
+		if(!coordinates || coordinates.length === 0){
+			console.warn('没有有效的坐标数据');
+			return;
+		}
+		
+		currentLineArr = coordinates.map(coord => [coord[0], coord[1]]);
+	    console.log('更新路线坐标:', currentLineArr);
+	    
+	    if (marker) {
+	        marker.stopMove();
+	    }
+	    
+	    // 清除之前的路线
+	    if (polyline) {
+	        polyline.setMap(null);
+	    }
+	    if (passedPolyline) {
+	        passedPolyline.setMap(null);
+	    }
+	    
+	    // 重新创建路线
+	    polyline = new AMap.Polyline({
+	        map: map,
+	        path: currentLineArr,
+	        showDir: true,
+	        strokeColor: "#28F",
+	        strokeWeight: 6,
+	    });
+	    
+	    // 重新创建已通过轨迹
+	    passedPolyline = new AMap.Polyline({
+	        map: map,
+	        strokeColor: "#AF5",
+	        strokeWeight: 6,
+	    });
+	    
+	    // 更新标记位置到起点
+	    marker.setPosition(currentLineArr[0]);
+	    
+	    // 重新绑定移动事件
+	    marker.on('moving', function (e) {
+	        passedPolyline.setPath(e.passedPath);
+	        map.setCenter(e.target.getPosition(), true);
+	    });
+	    
+	    // 调整地图视野以适应新路线
+	    map.setFitView([polyline]);
+	    
+	    // 可选：自动开始动画
+	    // startAnimation();
+	    
+    }
+    
 </script>
 </body>
 </html>

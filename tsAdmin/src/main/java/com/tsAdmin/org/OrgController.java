@@ -183,21 +183,50 @@ public class OrgController extends Controller {
 	            
 	            if (paths != null && paths.size() > 0) {
 	                JSONObject firstPath = paths.getJSONObject(0);
-	                String polyline = firstPath.getString("polyline"); // 获取途径点串
 	                
-	                // 将polyline字符串转换为坐标数组
-	                List<double[]> coordinates = parsePolyline(polyline);
+	                JSONArray steps = firstPath.getJSONArray("steps");
 	                
-	                // 返回给前端
-	                Map<String, Object> response = new HashMap<>();
-	                response.put("code", 1);
-	                response.put("message", "成功");
-	                response.put("polyline", polyline);
-	                response.put("coordinates", coordinates);
-	                response.put("distance", firstPath.get("distance"));
-	                response.put("duration", firstPath.get("duration"));
-	                
-	                renderJson(response);
+	                if(steps != null && steps.size() > 0) {
+		                
+	                	List<double[]> polylines = new ArrayList<>();
+	                	
+		                for(int i = 0; i < steps.size(); i++) {
+			                JSONObject step = steps.getJSONObject(i);
+			                
+			                String newPolyline = step.getString("polyline");
+			                if (newPolyline == null || newPolyline.isEmpty()) {
+			                	System.out.println("无效数据");} else {System.out.println("有效数据");
+			        	    }
+			        	    
+			        	    String[] points = newPolyline.split(";");
+			        	    for (String point : points) {
+			        	        String[] coords = point.split(",");
+			        	        if (coords.length == 2) {
+			        	            try {
+			        	                double lng = Double.parseDouble(coords[0]);
+			        	                double lat = Double.parseDouble(coords[1]);
+			        	                polylines.add(new double[]{lng, lat});
+			        	            } catch (NumberFormatException e) {
+			        	                // 忽略格式错误的坐标
+			        	            }
+			        	        }
+			        	    }
+		                }
+		                
+		                // 返回给前端
+		                Map<String, Object> response = new HashMap<>();
+		                response.put("code", 1);
+		                response.put("message", "成功");
+		                response.put("polylines", polylines);
+		                response.put("distance", firstPath.get("distance"));
+		                response.put("duration", firstPath.get("duration"));
+		                //response.put("result", result);
+		                //response.put("step", firstStep.get("instruction"));    //测试
+		                
+		                renderJson(response);
+	                } else {
+	                	renderJson(Ret.fail("code", -1).set("message", "未找到步骤"));
+	                }
 	            } else {
 	            	renderJson(Ret.fail("code", -1).set("message", "未找到路径"));
 	            }
@@ -209,29 +238,6 @@ public class OrgController extends Controller {
 		} catch (Exception e) {
 			renderJson(Ret.fail("code", -1).set("message", "数据查询失败"));
 		}
-	}
-	
-	//将polyline字符串变成二元组数组
-	private List<double[]> parsePolyline(String polyline) {
-	    List<double[]> coordinates = new ArrayList<>();
-	    if (polyline == null || polyline.isEmpty()) {
-	        return coordinates;
-	    }
-	    
-	    String[] points = polyline.split(";");
-	    for (String point : points) {
-	        String[] coords = point.split(",");
-	        if (coords.length == 2) {
-	            try {
-	                double lng = Double.parseDouble(coords[0]);
-	                double lat = Double.parseDouble(coords[1]);
-	                coordinates.add(new double[]{lng, lat});
-	            } catch (NumberFormatException e) {
-	                // 忽略格式错误的坐标
-	            }
-	        }
-	    }
-	    return coordinates;
 	}
 	
 	/**
