@@ -164,6 +164,76 @@ public class OrgController extends Controller {
 		
 	}
 	
+	@Clear
+	public void getPolyline() {
+		try {
+			String origin = getPara("origin", "116.478935,39.997761");
+	        String destination = getPara("destination", "116.484648,39.999861");
+			String myKey = "680174f12400afe6abc38c1c20d3cca1";
+			
+			String getPolylineDataURL = "https://restapi.amap.com/v3/direction/driving?"
+					+ "origin=" + origin + "&destination=" + destination + "&extensions=all&output=json&key=" + myKey;
+			String result = HttpKit.get(getPolylineDataURL);
+			
+			JSONObject jsonResult = JSONObject.parseObject(result);
+			if ("1".equals(jsonResult.getString("status"))) {
+	            // 请求成功
+	            JSONObject route = jsonResult.getJSONObject("route");
+	            JSONArray paths = route.getJSONArray("paths");
+	            
+	            if (paths != null && paths.size() > 0) {
+	                JSONObject firstPath = paths.getJSONObject(0);
+	                String polyline = firstPath.getString("polyline"); // 获取途径点串
+	                
+	                // 将polyline字符串转换为坐标数组
+	                List<double[]> coordinates = parsePolyline(polyline);
+	                
+	                // 返回给前端
+	                Map<String, Object> response = new HashMap<>();
+	                response.put("code", 1);
+	                response.put("message", "成功");
+	                response.put("polyline", polyline);
+	                response.put("coordinates", coordinates);
+	                response.put("distance", firstPath.get("distance"));
+	                response.put("duration", firstPath.get("duration"));
+	                
+	                renderJson(response);
+	            } else {
+	            	renderJson(Ret.fail("code", -1).set("message", "未找到路径"));
+	            }
+	        } else {
+	            // 高德API返回错误
+	            renderJson(Ret.fail("code", -1).set("message", "高德地图API错误"));
+	        }
+			
+		} catch (Exception e) {
+			renderJson(Ret.fail("code", -1).set("message", "数据查询失败"));
+		}
+	}
+	
+	//将polyline字符串变成二元组数组
+	private List<double[]> parsePolyline(String polyline) {
+	    List<double[]> coordinates = new ArrayList<>();
+	    if (polyline == null || polyline.isEmpty()) {
+	        return coordinates;
+	    }
+	    
+	    String[] points = polyline.split(";");
+	    for (String point : points) {
+	        String[] coords = point.split(",");
+	        if (coords.length == 2) {
+	            try {
+	                double lng = Double.parseDouble(coords[0]);
+	                double lat = Double.parseDouble(coords[1]);
+	                coordinates.add(new double[]{lng, lat});
+	            } catch (NumberFormatException e) {
+	                // 忽略格式错误的坐标
+	            }
+	        }
+	    }
+	    return coordinates;
+	}
+	
 	/**
 	 * 登录页面
 	 */

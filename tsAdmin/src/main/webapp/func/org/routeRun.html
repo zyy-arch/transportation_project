@@ -6,10 +6,13 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>轨迹回放</title>
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <link href="../ui/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         html, body, #container {
             height: 100%;
             width: 100%;
+        	margin: 0;
+        	padding: 0;
         }
 
         .input-card .btn{
@@ -18,18 +21,105 @@
         }
 
         .input-card .btn:last-child{
-            margin-right: 0;
-        }
-    </style>
+        margin-right: 0;
+    }
+    
+    .control-panel {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: white;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        z-index: 1000;
+        width: 320px; /* 固定宽度 */
+        max-width: 320px;
+    }
+    
+    .control-panel .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .control-panel .btn {
+        margin-bottom: 5px;
+    }
+    
+    .control-panel h4 {
+        margin-top: 0;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .control-panel hr {
+        margin: 15px 0;
+    }
+    
+    /* 确保按钮不会被隐藏 */
+    .control-panel input[type="button"] {
+        display: block;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+    
+    /* 为按钮添加间距 */
+    .control-panel .row {
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+    
+    .control-panel .col-xs-6 {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+	</style>
 </head>
 <body>
 <div id="container"></div>
-<div class="input-card">
+<!-- 控制面板 -->
+<div class="control-panel">
     <h4>轨迹回放控制</h4>
-    <div class="input-item">
-        <input type="button" class="btn" value="开始动画" id="start" onclick="startAnimation()"/>
-        <input type="button" class="btn" value="暂停动画" id="pause" onclick="pauseAnimation()"/>
+    
+    <!-- 第一行按钮 -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-6">
+                <input type="button" class="btn btn-primary btn-block" value="开始动画" id="start" onclick="startAnimation()"/>
+            </div>
+            <div class="col-xs-6">
+                <input type="button" class="btn btn-secondary btn-block" value="暂停动画" id="pause" onclick="pauseAnimation()"/>
+            </div>
+        </div>
     </div>
+    
+    <!-- 第二行按钮 -->
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-6">
+                <input type="button" class="btn btn-info btn-block" value="继续动画" id="resume" onclick="resumeAnimation()"/>
+            </div>
+            <div class="col-xs-6">
+                <input type="button" class="btn btn-warning btn-block" value="停止动画" id="stop" onclick="stopAnimation()"/>
+            </div>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <div class="form-group">
+        <label for="originInput">起点坐标</label>
+        <input class="form-control" id="originInput" type="text" placeholder="经度,纬度" value="116.478935,39.997761">
+    </div>
+    <div class="form-group">
+        <label for="destinationInput">终点坐标</label>
+        <input class="form-control" id="destinationInput" type="text" placeholder="经度,纬度" value="116.484648,39.999861">
+    </div>
+    <div class="form-group">
+        <button class="btn btn-success btn-block" onclick="backGetData()">后端获取模拟</button>
+    </div>
+
+<!-- jQuery -->
+<script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
     <div class="input-item">
         <input type="button" class="btn" value="继续动画" id="resume" onclick="resumeAnimation()"/>
         <input type="button" class="btn" value="停止动画" id="stop" onclick="stopAnimation()"/>
@@ -104,7 +194,38 @@
         window.stopAnimation = function () {
             marker.stopMove();
         };
+        
     });
+    
+    function backGetData () {
+    	var origin = $("#originInput").val() || "116.478935,39.997761";
+        var destination = $("#destinationInput").val() || "116.484648,39.999861";
+    	
+    	console.log('按钮交互测试成功');
+    	$.ajax({
+            url: '../org/getPolyline', // 后端API地址
+            type: 'GET', // 请求方式
+            data: {
+                origin: origin,
+                destination: destination
+            },
+            dataType: 'json', // 预期返回的数据类型
+            success: function(response) {
+                // 请求成功处理
+                if (response.code == 1) {
+                    // 成功获取数据，在地图上添加标记
+                    console.log('获取数据成功')
+                } else {
+                    alert('获取数据失败：' + response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                // 请求失败处理
+                alert('数据加载失败，请稍后重试');
+            }
+        });
+    }
+
 </script>
 </body>
 </html>
