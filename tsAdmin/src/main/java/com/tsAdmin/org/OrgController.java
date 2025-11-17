@@ -159,6 +159,10 @@ public class OrgController extends Controller {
 	    }
     }
 	
+	@Clear
+	public void routeRun() {
+		
+	}
 	
 	/**
 	 * 登录页面
