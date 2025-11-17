@@ -59,16 +59,46 @@
   </div>
 <!-- jQuery -->
 <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+  window._AMapSecurityConfig = {
+  	securityJsCode: "a30687b5aa11a62810d2e1dabfec39ae",
+  }
+</script>
 <!-- 加载地图JSAPI脚本 -->
-<script src="https://webapi.amap.com/maps?v=2.0&key=18c90408a2b07ec81650ec594f32bd2a"></script>
+<script src="https://webapi.amap.com/maps?v=2.0&key=fb938c25f1975ef5cc397e4e9cf63652"></script>
 <!-- <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script> -->
 <script>
 	var map = new AMap.Map("container", {
     	resizeEnable: true,
-    	center: [113.124075, 23.018825],
+    	//center: [113.124075, 23.018825],
+    	center: [116.397428, 39.90923],
     	zoom: 13
   	});
-    
+
+	// 加载驾车路线规划插件
+	AMap.plugin('AMap.Driving', function () {
+	    // 创建Driving实例
+	    // 可选配置：policy是规划策略，LEAST_TIME表示最快路线
+	    var driving = new AMap.Driving({
+	        map: map, // 要显示路线的地图实例
+	        policy: 0
+	    });
+
+	    // 定义起点和终点（例如：从佛山蜜雪冰城到故宫）
+	    var startLngLat = [113.124075, 23.018825]; // 起点经纬度
+	    var endLngLat = [116.397056, 39.917337]; // 终点经纬度
+
+	    // 执行路径规划搜索
+	    driving.search(startLngLat, endLngLat, function (status, result) {
+	        // 回调函数
+	        if (status === 'complete') {
+	            console.log('路线规划成功，路线已绘制在地图上');
+	        } else {
+	            console.error('路线规划失败，错误信息：', result);
+	        }
+	    });
+	});
+	
     function addMarker() {
     	
     	$.ajax({
