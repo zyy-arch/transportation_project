@@ -108,11 +108,11 @@
     
     <div class="form-group">
         <label for="originInput">起点坐标</label>
-        <input class="form-control" id="originInput" type="text" placeholder="经度,纬度" value="116.478935,39.997761">
+        <input class="form-control" id="originInput" type="text" placeholder="经度,纬度">
     </div>
     <div class="form-group">
         <label for="destinationInput">终点坐标</label>
-        <input class="form-control" id="destinationInput" type="text" placeholder="经度,纬度" value="116.484648,39.999861">
+        <input class="form-control" id="destinationInput" type="text" placeholder="经度,纬度">
     </div>
     <div class="form-group">
         <button class="btn btn-success btn-block" onclick="backGetData()">后端获取模拟</button>
@@ -201,8 +201,8 @@
     });
     
     function backGetData () {
-    	var origin = $("#originInput").val() || "116.478935,39.997761";
-        var destination = $("#destinationInput").val() || "116.484648,39.999861";
+    	var origin = $("#originInput").val();
+        var destination = $("#destinationInput").val();
     	
     	console.log('按钮交互测试成功');
     	$.ajax({
